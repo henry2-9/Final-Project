@@ -287,5 +287,4 @@ void printFigure(int failinFigure)    //This function clears the screen and prin
 	}
 
 	return;
-
 }
