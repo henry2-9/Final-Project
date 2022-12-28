@@ -214,6 +214,20 @@ void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumb
 			}
 		}
 
+		int help = 0;
+		if (scannedChar == 1)
+		{
+			help++;
+			for (int i = 0; i < letterNumber; i++)
+			{
+				if (userWordinFunction[i] != wordinFunction[i])
+				{
+					userWordinFunction[i] = wordinFunction[i];
+					break;
+				}
+			}
+		}
+
 		if (letterTrueCheck == 0)						//This part means that user entered a wrong character
 		{
 			totalFail++;
