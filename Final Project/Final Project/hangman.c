@@ -166,17 +166,18 @@ int main(void)
 void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumber)      //Function for checking the letter, incrementing counters etc.
 {
 	int totalTrue = 0;			//Total number of true entered letters -if equals to letterNumber game is over-
-	int totalFail = 0;			//Total number of fails -must be less than 9 or game is over-
+	int totalFail = {9};			//Total number of fails -must be less than 9 or game is over-
 	char scannedChar;
 
-	while (totalFail < 9)
+	while (totalFail >0)
 	{
 		printFigure(totalFail);		//Program goes function to print the corresponding figure to fail
 		printf("\n\n\n");
+		printf("You have %d guesses left\n", totalFail);
 		printUserWord(userWordinFunction, letterNumber);     //Program goes function to print the user's array
 		printf("\nEnter a character: ");
 		scanf(" %c", &scannedChar);
-		scannedChar = toupper(scannedChar);
+		scannedChar = toupper(scannedChar);			//small letter to big letter
 
 		int letterAlreadyUsed = 1;			//Program checks whether the inputted letter is already found or not
 		while (letterAlreadyUsed == 1)
@@ -216,7 +217,7 @@ void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumb
 
 		if (letterTrueCheck == 0)						//This part means that user entered a wrong character
 		{
-			totalFail++;
+			totalFail--;
 		}
 
 		if (totalTrue == letterNumber)                //This if statement works if you win the game and returns to main
@@ -254,34 +255,34 @@ void printFigure(int failinFigure)    //This function clears the screen and prin
 
 	switch (failinFigure)
 	{
-	case 0:
+	case 9:
 		printf("\n\n\n\n\n        \n        \n        \n     __|__");
 		break;
-	case 1:
+	case 8:
 		printf("\n\n\n\n\n       |\n       |\n       |\n     __|__");
 		break;
-	case 2:
+	case 7:
 		printf("  _ _ _\n       |\n       |\n       |\n       |\n       |\n       |\n       |\n     __|__ ");
 		break;
-	case 3:
+	case 6:
 		printf("  _ _ _  \n |     | \n |     | \n       |\n       |\n       |\n       |\n       |\n     __|__ ");
 		break;
-	case 4:
+	case 5:
 		printf("  _ _ _  \n |     | \n |     | \n( )    |\n       |\n       |\n       |\n       |\n     __|__ ");
 		break;
-	case 5:
+	case 4:
 		printf("  _ _ _  \n |     | \n |     | \n( )    |\n/      |\n       |\n       |\n       |\n     __|__ ");
 		break;
-	case 6:
+	case 3:
 		printf("  _ _ _  \n |     | \n |     | \n( )    |\n/ \\    |\n       |\n       |\n       |\n     __|__ ");
 		break;
-	case 7:
+	case 2:
 		printf("  _ _ _  \n |     | \n |     | \n( )    |\n/|\\    |\n |     |\n |     |\n       |\n     __|__ ");
 		break;
-	case 8:
+	case 1:
 		printf("  _ _ _  \n |     | \n |     | \n( )    |\n/|\\    |\n |     |\n |     |\n/      |\n     __|__ ");
 		break;
-	case 9:
+	case 0:
 		printf("  _ _ _  \n |     | \n |     | \n( )    |\n/|\\    |\n |     |\n |     |\n/ \\    |\n     __|__ ");
 		break;
 	}
