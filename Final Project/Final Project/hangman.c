@@ -157,7 +157,7 @@ int main(void)
 
 		gameFunction(askedWord, userWord, (gameType + 5));    //Program goes to gameFunction with neccessary arrays and lettter size
 
-		printf("\n\nEnter 1 to restart game\nEnter any other number to exit\n");    //At the end of the game program asks user to replay or not
+		printf("\n\nEnter 1 to restart game\nEnter any other number to exit(One Time Only)\n");    //At the end of the game program asks user to replay or not
 		scanf(" %d", &restartGame);
 		system("cls");
 	}
@@ -165,15 +165,17 @@ int main(void)
 
 void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumber)      //Function for checking the letter, incrementing counters etc.
 {
+	int help = 0;
 	int totalTrue = 0;			//Total number of true entered letters -if equals to letterNumber game is over-
-	int totalFail = {9};			//Total number of fails -must be less than 9 or game is over-
+	int totalFail = { 9 };			//Total number of fails -must be less than 9 or game is over-
 	char scannedChar;
 
-	while (totalFail >0)
+	while (totalFail > 0)
 	{
 		printFigure(totalFail);		//Program goes function to print the corresponding figure to fail
 		printf("\n\n\n");
 		printf("You have %d guesses left\n", totalFail);
+		printf("Enter 1 to give you a hint(One Time Only!!!)\n");
 		printUserWord(userWordinFunction, letterNumber);     //Program goes function to print the user's array
 		printf("\nEnter a character: ");
 		scanf(" %c", &scannedChar);
@@ -213,6 +215,25 @@ void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumb
 				letterTrueCheck++;
 				totalTrue++;
 			}
+		}
+
+		int k = 0;
+		if (scannedChar == '1' && help == 0)
+		{
+			while (k < letterNumber)			   //... it is a part of askedWord or not with counters
+			{
+				if (userWordinFunction[k] == '_')		   //This part means that user entered a correct character
+				{
+					userWordinFunction[k] = wordinFunction[k];
+					break;
+				}
+				else
+				{
+					k++;
+				}
+			}
+			help++;
+			totalTrue++;
 		}
 
 		if (letterTrueCheck == 0)						//This part means that user entered a wrong character
