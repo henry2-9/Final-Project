@@ -3,7 +3,7 @@
 #include <time.h>
 #include <ctype.h>
 
-void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumber);   //Function for checking the letter, incrementing counters etc.
+void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumber, const char* wordTopic[], int type);   //Function for checking the letter, incrementing counters etc.
 void printUserWord(char* userWordinPrint, int letterNumber);			       //Function for printing the hanmgan figure 
 void printFigure(int failinFigure);						       //Function for printing the array of user
 
@@ -68,7 +68,7 @@ int main(void)
 
 		char askedWord[8];									//Array for holding the word
 		char userWord[8] = { '_','_','_','_','_','_','_' };    //Array for user's true letters
-
+		const char* topic[5] = { "","Fruits and Vegetables", "Sports", "Technological Devices", "Countries" };
 		int randomer = rand() % 5;                           //Program writes appropriate random word to askedWord array from readed file
 
 		if (categoryType == 1)      //Category for Fruits and Vegetables
@@ -155,7 +155,9 @@ int main(void)
 			}
 		}
 
-		gameFunction(askedWord, userWord, (gameType + 5));    //Program goes to gameFunction with neccessary arrays and lettter size
+
+
+		gameFunction(askedWord, userWord, (gameType + 5), topic, categoryType);    //Program goes to gameFunction with neccessary arrays and lettter size
 
 		printf("\n\nEnter 1 to restart game\nEnter any other number to exit(One Time Only)\n");    //At the end of the game program asks user to replay or not
 		scanf(" %d", &restartGame);
@@ -163,7 +165,7 @@ int main(void)
 	}
 }
 
-void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumber)      //Function for checking the letter, incrementing counters etc.
+void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumber, const char* wordTopic[], int type)      //Function for checking the letter, incrementing counters etc.
 {
 	int help = 0;
 	int totalTrue = 0;			//Total number of true entered letters -if equals to letterNumber game is over-
@@ -171,23 +173,25 @@ void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumb
 	int x;
 	char scannedChar;
 	char guessedChar[100];
-	for ( x = 0; x < 100; x++)
+	for (x = 0; x < 100; x++)
 	{
 		guessedChar[x] = '\0';
 	}
 	x = 0;
 
-
 	while (totalFail > 0)
 	{
 		printFigure(totalFail);		//Program goes function to print the corresponding figure to fail
 		printf("\n\n\n");
+		printf("Your topic is %s\n", wordTopic[type]);
+		printf("There are %d letters in the word\n\n", letterNumber);
 		printf("You have %d guesses left\n", totalFail);
-		printf("Enter 1 to give you a hint(One Time Only!!!)\n");
+		printf("Enter 1 to give you a hint(One Time Only!!!)\n\n");
 		printUserWord(userWordinFunction, letterNumber);     //Program goes function to print the user's array
-		printf("\nyou have guessed : %s", guessedChar);
+		printf("\n\nYou have guessed : %s", guessedChar);
 		printf("\nEnter a character: ");
 		scanf(" %c", &scannedChar);
+
 		guessedChar[x] = scannedChar;
 		x++;
 		scannedChar = toupper(scannedChar);			//small letter to big letter
