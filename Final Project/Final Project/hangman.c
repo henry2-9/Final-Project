@@ -168,7 +168,15 @@ void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumb
 	int help = 0;
 	int totalTrue = 0;			//Total number of true entered letters -if equals to letterNumber game is over-
 	int totalFail = { 9 };			//Total number of fails -must be less than 9 or game is over-
+	int x;
 	char scannedChar;
+	char guessedChar[100];
+	for ( x = 0; x < 100; x++)
+	{
+		guessedChar[x] = '\0';
+	}
+	x = 0;
+
 
 	while (totalFail > 0)
 	{
@@ -177,8 +185,11 @@ void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumb
 		printf("You have %d guesses left\n", totalFail);
 		printf("Enter 1 to give you a hint(One Time Only!!!)\n");
 		printUserWord(userWordinFunction, letterNumber);     //Program goes function to print the user's array
+		printf("\nyou have guessed : %s", guessedChar);
 		printf("\nEnter a character: ");
 		scanf(" %c", &scannedChar);
+		guessedChar[x] = scannedChar;
+		x++;
 		scannedChar = toupper(scannedChar);			//small letter to big letter
 
 		int letterAlreadyUsed = 1;			//Program checks whether the inputted letter is already found or not
