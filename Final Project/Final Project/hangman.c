@@ -3,7 +3,7 @@
 #include <time.h>
 #include <ctype.h>
 
-void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumber, const char *wordTopic[],int type);   //Function for checking the letter, incrementing counters etc.
+void gameFunction(char* wordinFunction, char* userWordinFunction, int letterNumber, const char* wordTopic[], int type);   //Function for checking the letter, incrementing counters etc.
 void printUserWord(char* userWordinPrint, int letterNumber);			       //Function for printing the hanmgan figure 
 void printFigure(int failinFigure);						       //Function for printing the array of user
 
@@ -68,7 +68,7 @@ int main(void)
 
 		char askedWord[8];									//Array for holding the word
 		char userWord[8] = { '_','_','_','_','_','_','_' };    //Array for user's true letters
-		const char *topic[5] = {"","Fruits and Vegetables", "Sports", "Technological Devices", "Countries"};
+		const char* topic[5] = { "","Fruits and Vegetables", "Sports", "Technological Devices", "Countries" };
 		int randomer = rand() % 5;                           //Program writes appropriate random word to askedWord array from readed file
 
 		if (categoryType == 1)      //Category for Fruits and Vegetables
@@ -155,7 +155,7 @@ int main(void)
 			}
 		}
 
-		
+
 
 		gameFunction(askedWord, userWord, (gameType + 5), topic, categoryType);    //Program goes to gameFunction with neccessary arrays and lettter size
 
